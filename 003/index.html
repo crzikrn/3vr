@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl,geometry,cube study</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0px;
+				background-color: #33CD99;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="../js/three.js"></script>
+		<script src="../js/StereoEffect.js"></script>
+		<script src="../js/OrbitControls.js"></script>
+		<script src="../js/DeviceOrientationControls.js"></script>
+		<script type="text/javascript" src="../js/dat.gui.min.js"></script>
+		<script>
+
+			var camera, scene, renderer, effect;
+      var pointLight;
+      //mesh takes in geometry and material
+      var mesh;
+			var cubeArray = {
+				size:2
+			};
+			var guiStore = {
+				numBox: 100,
+				color: 0xFF2050
+			};
+			var gui = new dat.GUI();
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+      init();
+      animate();
+
+			//the setup
+      function init(){
+			  camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight , 1, 500);
+        camera.position.z = 50;
+
+				controls = new THREE.OrbitControls(camera, element);
+        controls.target.set(
+          camera.position.x + 0.15,
+          camera.position.y,
+          camera.position.z
+        );
+        controls.noPan = true;
+        controls.noZoom = true;
+        // Our preferred controls via DeviceOrientation
+        function setOrientationControls(e) {
+          if (!e.alpha) {
+            return;
+          }
+          controls = new THREE.DeviceOrientationControls(camera, true);
+          controls.connect();
+          controls.update();
+          element.addEventListener('click', fullscreen, false);
+          window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
+        window.addEventListener('deviceorientation', setOrientationControls, true);
+
+        scene = new THREE.Scene();
+
+        //var texture = new THREE.TextureLoader().load( 'texture/crate.gif' );
+
+        pointLight = new THREE.PointLight(0xFFFFFF);
+
+        // set its position
+        pointLight.position.x = 10;
+        pointLight.position.y = 50;
+        pointLight.position.z = 90;
+        // add to the scene
+        scene.add(pointLight);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        renderer.setClearColor (0x33CD99, 0.9);
+				var element = renderer.domElement;
+
+				effect = new THREE.StereoEffect(renderer);
+				effect.setSize( window.innerWidth, window.innerHeight );
+				window.addEventListener( 'resize', onWindowResize, false );
+
+				scene.add(effect);
+        document.body.appendChild(renderer.domElement);
+
+				cubeArray.array = [];
+				for (var i = 0; i < 1985; i++) {
+					cubeCreate = new createCube();
+					//make an array with meshes.
+					cubeArray.array.push(cubeCreate);
+					scene.add(cubeArray.array[i]);
+				}
+
+				//gui.add(camera, 'position',-50,100);
+					gui.add(scene,'name');
+					gui.addColor(guiStore,'color');
+					gui.add(cubeArray,'size',0,15);
+
+      }
+
+			function setOrientationControls(e) {
+  			if (!e.alpha) {
+		    return;
+		  	}
+				controls = new THREE.DeviceOrientationControls(camera, true);
+          controls.connect();
+          controls.update();
+          element.addEventListener('click', fullscreen, false);
+          window.removeEventListener('deviceorientation', setOrientationControls, true);
+			}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2,
+				windowHalfY = window.innerHeight / 2,
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				effect.setSize( window.innerWidth, window.innerHeight );
+			}
+
+      function animate(){
+        //console.log(mesh.position);
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render(){
+				//RENDERING EACH BOX OBJECT
+        for ( var i = 0; i < scene.children.length; i ++ ) {
+					var object = scene.children[ i ];
+          if ( object instanceof THREE.Mesh ) {
+            object.rotation.x += Math.random(50)*0.07;
+            object.rotation.y += Math.random(100,2000)*0.05;
+            object.position.z += Math.random(1)*0.001;
+						object.scale.x = cubeArray.size;
+						object.scale.y = cubeArray.size;
+						object.scale.z = cubeArray.size;
+						object.material.color = new THREE.Color(guiStore.color);
+          }
+				}
+        pointLight.rotation.y += 0.005;
+        scene.rotation.y += 0.003;
+        scene.rotation.x += 0.005;
+				//render(scene,camera);
+        effect.render( scene, camera );
+      }
+
+			function createCube(){
+				var size = 0.5;//Math.random(0,1)*3;
+				//console.log(size);
+				var geometry = new THREE.BoxGeometry(size,size,size);
+				//takes in an object;
+				var material = new THREE.MeshLambertMaterial( {color:0xFF2050} );
+			  var mesh = new THREE.Mesh( geometry, material);
+				mesh.position.x = Math.random(-50,50)*100-50;
+				mesh.position.y = Math.random(-50,50)*100-50;
+				mesh.position.z = Math.random(-50,50)*100-50;
+				return mesh;
+			};
+
+		</script>
+	</body>
+</html>
