@@ -76,12 +76,12 @@
         container.appendChild( element );
 
         //CONTROLS
-        //var controls = new THREE.OrbitControls( camera, element );
-        var controls = new THREE.DeviceOrientationControls(camera, true);
+        var controls = new THREE.OrbitControls( camera, element );
+        //var controls = new THREE.DeviceOrientationControls(camera, true);
         controls.noPan = true;
         controls.noZoom = true;
 
-      //  window.addEventListener('deviceorientation', setOrientationControls, true);
+        window.addEventListener('deviceorientation', setOrientationControls, true);
 
         //ADD TEXT
         var hello = new vrDiv("hello",500,500);
@@ -104,16 +104,16 @@
         controls.update();
       }
 
-      // function setOrientationControls(e) {
-      //   if (!e.alpha) {
-      //   return;
-      //   }
-      //   //controls = new THREE.DeviceOrientationControls(camera);
-      //     //controls.connect();
-      //
-      //     element.addEventListener('click', fullscreen, false);
-      //     window.removeEventListener('deviceorientation', setOrientationControls, true);
-      // }
+      function setOrientationControls(e) {
+        if (!e.alpha) {
+        return;
+        }
+        controls = new THREE.DeviceOrientationControls(camera, element);
+        controls.connect();
+
+          element.addEventListener('click', fullscreen, false);
+          window.removeEventListener('deviceorientation', setOrientationControls, true);
+      }
 
       function onWindowResize() {
 
