@@ -30,9 +30,9 @@
       case 'landscape-primary':
         return 0;
       case 'landscape-secondary':
-        return -90;
+        return 0;
       case 'portrait-secondary':
-        return 180;
+        return 0;
       case 'portrait-primary':
         return 0;
     }
@@ -40,11 +40,13 @@
     // and window orientation is undefined OR 0
     // if (!window.orientation && window.innerWidth > window.innerHeight)
     //   return 90;
-    return window.orientation || 0;
+    // return window.orientation || 0;
+    return 0;
   }
 
   function onScreenOrientationChangeEvent() {
-    screenOrientation = getOrientation();
+    //screenOrientation = getOrientation();
+    screenOrientation = 0;
   }
   window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
 
@@ -93,11 +95,11 @@ THREE.DeviceOrientationControls = function(object) {
       if (this.freeze) return;
 
       // should not need this
-      var orientation = getOrientation();
-      if (orientation !== this.screenOrientation) {
-        this.screenOrientation = orientation;
-        this.autoAlign = true;
-      }
+      // var orientation = getOrientation();
+      // if (orientation !== this.screenOrientation) {
+      //   this.screenOrientation = orientation;
+      //   this.autoAlign = true;
+      // }
 
       this.alpha = deviceOrientation.gamma ?
         THREE.Math.degToRad(deviceOrientation.alpha) : 0; // Z
