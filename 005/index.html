@@ -60,7 +60,7 @@
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
         camera.position.set(0,-100,1500);
         scene.add(camera);
-        //cameraTarget = new THREE.Vector3(0,150,0);
+        cameraTarget = new THREE.Vector3(0,150,0);
 
         //RENDERER
         renderer = new THREE.WebGLRenderer();
@@ -77,6 +77,8 @@
 
         //CONTROLS
         var controls = new THREE.OrbitControls( camera, element );
+        controls.noPan = true;
+        controls.noZoom = true;
         window.addEventListener('deviceorientation', setOrientationControls, true);
 
         //ADD TEXT
