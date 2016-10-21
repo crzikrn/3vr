@@ -76,10 +76,12 @@
         container.appendChild( element );
 
         //CONTROLS
-        var controls = new THREE.OrbitControls( camera, element );
+        //var controls = new THREE.OrbitControls( camera, element );
+        var controls = new THREE.DeviceOrientationControls(camera);
         controls.noPan = true;
         controls.noZoom = true;
-        window.addEventListener('deviceorientation', setOrientationControls, true);
+
+      //  window.addEventListener('deviceorientation', setOrientationControls, true);
 
         //ADD TEXT
         var hello = new vrDiv("hello",500,500);
