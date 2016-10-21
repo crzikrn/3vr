@@ -28,7 +28,7 @@
   function getOrientation() {
     switch (window.screen.orientation || window.screen.mozOrientation) {
       case 'landscape-primary':
-        return 90;
+        return 0;
       case 'landscape-secondary':
         return -90;
       case 'portrait-secondary':
