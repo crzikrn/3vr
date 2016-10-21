@@ -30,6 +30,7 @@
       var camera, cameraTarget, scene;
       var renderer, effect;
       var controls;
+      var element;
       var byun;
 
       var mouseX = 0;
@@ -66,7 +67,7 @@
         renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.setClearColor (0xFEFEFE);
-        var element = renderer.domElement;
+        element = renderer.domElement;
 
         //EFFECT
         effect = new THREE.StereoEffect(renderer);
@@ -103,7 +104,7 @@
       function render(){
         scene.children[2].rotation.y = -Math.PI/4;
         scene.children[1].rotation.y = -Math.PI/4;
-        
+
         controls.update();
         effect.render(scene,camera);
 
@@ -115,9 +116,9 @@
           }
         else {
         controls = new THREE.DeviceOrientationControls( camera );
-        controls.connect();
-        controls.update();
-        //element.addEventListener('click', fullscreen, false);
+        //controls.connect();
+        //controls.update();
+        element.addEventListener('click', fullscreen, false);
         window.removeEventListener('deviceOrientationEvent', setOrientationControls, true);
         }
       }
