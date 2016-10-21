@@ -85,7 +85,7 @@
         // controls.noPan = true;
         // controls.noZoom = true;
         //
-        window.addEventListener('deviceorientation', setOrientationControls, true);
+        window.addEventListener('screenorientation', setOrientationControls, true);
 
         //ADD TEXT
         var hello = new vrDiv("hello",500,500);
@@ -119,7 +119,7 @@
         controls.connect();
         controls.update();
         element.addEventListener('click', fullscreen, false);
-        window.removeEventListener('deviceorientation', setOrientationControls, true);
+        window.removeEventListener('screenorientation', setOrientationControls, true);
       }
 
       function onWindowResize() {
