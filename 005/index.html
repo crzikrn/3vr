@@ -76,7 +76,7 @@
         container.appendChild( element );
 
         //CONTROLS
-        controls = new THREE.OrbitControls( camera, element );
+        controls = new THREE.OrbitControls( camera );
         //var controls = new THREE.DeviceOrientationControls( camera );
 
         // var controls = new THREE.OrbitControls( camera, element );
@@ -117,7 +117,7 @@
         // controls.connect();
         // controls.update();
         //element.addEventListener('click', fullscreen, false);
-        //window.removeEventListener('deviceorientation', setOrientationControls, true);
+        window.removeEventListener('deviceorientation', setOrientationControls, true);
         }
       }
 
