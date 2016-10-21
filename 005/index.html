@@ -105,7 +105,7 @@
         scene.children[2].rotation.y = -Math.PI/4;
         scene.children[1].rotation.y = -Math.PI/4;
 
-        controls.update();
+        //controls.update();
         effect.render(scene,camera);
 
       }
@@ -117,7 +117,7 @@
 
         controls = new THREE.DeviceOrientationControls( camera );
         controls.connect();
-        //controls.update();
+        controls.update();
         element.addEventListener('click', fullscreen, false);
         window.removeEventListener('deviceorientation', setOrientationControls, true);
       }
