@@ -85,7 +85,7 @@
         // controls.noPan = true;
         // controls.noZoom = true;
         //
-        window.addEventListener('ondeviceorientation', setOrientationControls, true);
+        window.addEventListener('deviceorientation', setOrientationControls, true);
 
         //ADD TEXT
         var hello = new vrDiv("hello",500,500);
@@ -117,9 +117,9 @@
 
         controls = new THREE.DeviceOrientationControls( camera );
         //controls.connect();
-        controls.update();
+        //controls.update();
         element.addEventListener('click', fullscreen, false);
-        window.removeEventListener('ondeviceorientation', setOrientationControls, true);
+        window.removeEventListener('deviceorientation', setOrientationControls, true);
       }
 
       function onWindowResize() {
