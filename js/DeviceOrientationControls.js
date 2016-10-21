@@ -28,9 +28,9 @@
   function getOrientation() {
     switch (window.screen.orientation || window.screen.mozOrientation) {
       case 'landscape-primary':
-        return 0;
+        return 90;
       case 'landscape-secondary':
-        return 0;
+        return -90;
       case 'portrait-secondary':
         return 180;
       case 'portrait-primary':
@@ -93,11 +93,11 @@ THREE.DeviceOrientationControls = function(object) {
       if (this.freeze) return;
 
       // should not need this
-      //var orientation = getOrientation();
-      //if (orientation !== this.screenOrientation) {
-        //this.screenOrientation = orientation;
-        //this.autoAlign = true;
-      //}
+      var orientation = getOrientation();
+      if (orientation !== this.screenOrientation) {
+        this.screenOrientation = orientation;
+        this.autoAlign = true;
+      }
 
       this.alpha = deviceOrientation.gamma ?
         THREE.Math.degToRad(deviceOrientation.alpha) : 0; // Z
