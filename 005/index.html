@@ -79,7 +79,6 @@
         //CONTROLS
         controls = new THREE.OrbitControls( camera, element );
 
-
       //  var controls = new THREE.OrbitControls( camera, element );
         //var controls = new THREE.DeviceOrientationControls(camera );
         controls.noPan = true;
@@ -104,8 +103,6 @@
       function render(){
         scene.children[2].rotation.y = -Math.PI/4;
         scene.children[1].rotation.y = -Math.PI/4;
-
-        //controls.update();
         effect.render(scene,camera);
 
       }
