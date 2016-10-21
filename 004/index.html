@@ -46,11 +46,11 @@
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 );
 				scene = new THREE.Scene();
 
-				urlPrefix = "../textures/";
-				var format = ".jpg";
-				urls = [ urlPrefix + "posx.jpg", urlPrefix + "negx.jpg",
-								urlPrefix + "posy.jpg", urlPrefix + "negy.jpg",
-								urlPrefix + "posz.jpg", urlPrefix + "negz.jpg"];
+				urlPrefix = "../textures/dt/";
+				var format = ".png";
+				urls = [ urlPrefix + "posx"+format, urlPrefix + "negx"+format,
+								urlPrefix + "posy"+format, urlPrefix + "negy"+format,
+								urlPrefix + "posz"+format, urlPrefix + "negz"+format];
 
 				var loader = new THREE.CubeTextureLoader();
 				textureCube = loader.load( urls );
