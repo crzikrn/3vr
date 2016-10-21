@@ -77,7 +77,7 @@
         container.appendChild( element );
 
         //CONTROLS
-        controls = new THREE.OrbitControls( camera, element );
+        //controls = new THREE.OrbitControls( camera, element );
         //var controls = new THREE.DeviceOrientationControls( camera );
 
         // var controls = new THREE.OrbitControls( camera, element );
@@ -105,7 +105,7 @@
         scene.children[2].rotation.y = -Math.PI/4;
         scene.children[1].rotation.y = -Math.PI/4;
 
-        //controls.update();
+        controls.update();
         effect.render(scene,camera);
 
       }
