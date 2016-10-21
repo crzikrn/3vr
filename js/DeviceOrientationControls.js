@@ -133,7 +133,7 @@ THREE.DeviceOrientationControls = function(object) {
       if (this.autoForward) {
 
         tempVector3
-          .set(0, 0, -1)
+          .set(0, 0, 0)
           .applyQuaternion(this.object.quaternion, 'ZXY')
           .setLength(this.movementSpeed / 50); // TODO: why 50 :S
 
@@ -186,4 +186,3 @@ THREE.DeviceOrientationControls = function(object) {
 };
 
 })();
-
